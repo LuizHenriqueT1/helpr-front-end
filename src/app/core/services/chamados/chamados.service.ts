@@ -27,4 +27,5 @@ export class ChamadosService {
   update(chamado: Chamado) {
     return this.http.put(`${this.chamadosUrl}/${chamado.id}`, chamado);
   }
+
 }
