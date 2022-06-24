@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -22,6 +23,7 @@ import { NgxMaskModule } from 'ngx-mask';
     MaterialModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
+    SharedModule,
   ]
 })
 export class ClientesModule { }
