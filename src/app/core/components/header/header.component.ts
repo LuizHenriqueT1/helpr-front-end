@@ -1,7 +1,9 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { AuthService } from '../../services/auth/auth.service';
 
 interface MenuItem {
   link: string;
@@ -22,7 +24,16 @@ export class HeaderComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
+logout() {
+  this.authService.onLogout();
+  this.router.navigate(['/auth'])
+}
 
   itensMenu: MenuItem[] = [
     {
