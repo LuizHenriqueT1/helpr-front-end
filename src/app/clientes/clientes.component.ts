@@ -1,6 +1,6 @@
-import { HotToastService } from '@ngneat/hot-toast';
 import { Component, OnInit } from '@angular/core';
-import { Observable, EMPTY } from 'rxjs';
+import { HotToastService } from '@ngneat/hot-toast';
+import { EMPTY, Observable } from 'rxjs';
 import { Cliente } from '../core/models/pessoa';
 import { ClientesService } from '../core/services/clientes/clientes.service';
 
@@ -16,7 +16,7 @@ export class ClientesComponent implements OnInit {
     'email',
     'cpf',
     'dataCriacao',
-    'acoes' // btn -> editar e deletar
+    'acoes', // btn -> editar e deletar
   ];
 
   clientes$: Observable<Cliente[]> = EMPTY;
@@ -24,7 +24,7 @@ export class ClientesComponent implements OnInit {
   constructor(
     private clientesService: ClientesService,
     private toast: HotToastService
-  ) { }
+  ) {}
 
   delete(id: number) {
     const canDelete = confirm('Tem certeza?');
@@ -34,20 +34,20 @@ export class ClientesComponent implements OnInit {
 
       this.clientesService.delete(id).subscribe({
         next: () => {
-          this.toast.success('Usuário deletado'),
-            ref.close();
+          this.toast.success('Usuário deletado');
+          ref.close();
         },
         error: (err) => {
           ref.close();
           switch (err.status) {
             case 403:
-              return this.toast.error('Usuário não tem permissao!');
+              return this.toast.error('Usuário não tem permissão');
             case 409:
-              return this.toast.error(err.erro.message);
+              return this.toast.error(err.error.message);
             default:
               return this.toast.error('Um erro aconteceu');
           }
-        }
+        },
       });
     }
   }
